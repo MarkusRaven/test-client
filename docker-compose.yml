@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: postgres-db
+    restart: always
+    image: postgres
+    environment:
+      - POSTGRES_USER=${TYPEORM_USERNAME}
+      - POSTGRES_PASSWORD=${TYPEORM_PASSWORD}
+      - POSTGRES_DB=${TYPEORM_DATABASE}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  # nestjs:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   image: test-api-backend
+  #   environment:
+  #     - DB_TYPE=${TYPEORM_CONNECTION}
+  #     - POSTGRES_HOST=${TYPEORM_HOST}
+  #     - POSTGRES_USER=${TYPEORM_USERNAME}
+  #     - POSTGRES_PASS=${TYPEORM_PASSWORD}
+  #     - POSTGRES_DB=${TYPEORM_DATABASE}
+  #     - POSTGRES_SYNC=false
+  #     - POSTGRES_PORT=${TYPEORM_PORT}
+  #     - APP_PORT=${PORT}
+  #   ports:
+  #     - '3000:3000'
+  #   container_name: nest-api-app
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - .:/test-backend
+  #     - /test-backend/node_modules
